@@ -1,0 +1,20 @@
+# Theme metadata
+name = "HEIA-FR"
+
+# Is theme light or dark?
+light = true
+
+# Primary
+primary = "#007CB7"
+
+# Menu
+menu_primary = "#fff"
+menu_text = "#333"
+menu_text_active = "#007CB7"
+menu_title = "#333"
+
+# Home sections
+home_section_odd = "rgb(255, 255, 255)"
+home_section_even = "rgb(247, 247, 247)"
+
+font = "heia_fr"
