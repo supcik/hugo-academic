@@ -1,4 +1,4 @@
-.avatar-rounded-square {
+.avatar-rounded-rectangle {
   border-radius: 10%;
   height: auto;
 }
@@ -6,7 +6,7 @@
 
 // Use smaller avatar size in About widget on small devices.
 @include media-breakpoint-down(sm) {
-  .wg-about .avatar-rounded-square {
+  .wg-about .avatar-rounded-rectangle {
     height: auto;
   }
 }
