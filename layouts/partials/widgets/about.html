@@ -9,7 +9,7 @@
   {{ $author = $page.Params.author }}
 {{end}}
 
-{{ $person_page_path := (printf "/authors/%s" (anchorize $author)) }}
+{{ $person_page_path := (printf "/authors/%s" $author) }}
 {{ $person_page := site.GetPage $person_page_path }}
 {{ if not $person_page }}
   {{ errorf "Could not find an author page at `%s`. Please check the value of `author` in your About widget and create an associated author page if one does not already exist. See https://sourcethemes.com/academic/docs/page-builder/#about " $person_page_path }}
@@ -24,21 +24,15 @@
     <div id="profile">
 
       {{ if site.Params.avatar.gravatar }}
-      <img class="avatar avatar-{{$avatar_shape}}" src="https://s.gravatar.com/avatar/{{ md5 $person.email }}?s=270')" alt="Avatar">
+      <img class="avatar {{if eq $avatar_shape "square"}}avatar-square{{else}}avatar-circle{{end}}" src="https://s.gravatar.com/avatar/{{ md5 $person.email }}?s=270')" alt="{{$person_page.Title}}">
       {{ else if $avatar }}
       {{if (or (eq $avatar_shape "square") (eq $avatar_shape "circle") )}}
       {{ $avatar_image := $avatar.Fill "270x270 Center" }}
-      {{ $scratch.Set "avatar_image" $avatar_image }}
-      {{ else }}
-      {{ $avatar_image := $avatar.Resize "270x" }}
-      {{ $scratch.Set "avatar_image" $avatar_image }}
-      {{ end }}
-      {{ $avatar_image := $scratch.Get "avatar_image" }}
-      <img class="avatar avatar-{{$avatar_shape}}" src="{{ $avatar_image.RelPermalink }}" alt="Avatar">
+      <img class="avatar {{if eq $avatar_shape "square"}}avatar-square{{else}}avatar-circle{{end}}" src="{{ $avatar_image.RelPermalink }}" alt="{{$person_page.Title}}">
       {{ end }}
 
       <div class="portrait-title">
-        <h2>{{ $person.name }}</h2>
+        <h2>{{ $person_page.Title }}</h2>
         {{ with $person.role }}<h3>{{ . | markdownify | emojify }}</h3>{{ end }}
 
         {{ range $person.organizations }}
